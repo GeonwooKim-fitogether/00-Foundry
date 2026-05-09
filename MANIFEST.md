@@ -1,0 +1,108 @@
+# MANIFEST — AI-NPI Factory v0.2.0
+
+Index of all artifacts in the 4-Layer Frame.
+
+> v0.2.0 frozen on 2026-05-08. validate-output runner implemented (`run.py`), `verification-runner` skill defined, `before-final` hook implemented. B-002 self-test passed (6/6, exit 0).
+
+## Root
+- `README.md` — entry point
+- `factory.yaml` — machine-readable manifest
+- `CHANGELOG.md`
+- `Glossary.md`
+
+## Layer 1 — Universal Operating Principles
+- `1_Universal_Operating_Principles/00_Overview.md`
+- `1_Universal_Operating_Principles/01_Decision_Principles.md`
+- `1_Universal_Operating_Principles/02_Quality_and_Safety.md`
+- `1_Universal_Operating_Principles/03_Scope_Management.md`
+- `1_Universal_Operating_Principles/04_Versioning_Principles.md`
+- `1_Universal_Operating_Principles/ontology-policy.md`
+- `1_Universal_Operating_Principles/GitHub_Foundry_관리정책.md` *(v0.2.1 candidate — Source of Truth + GitHub 단일 동기화 채널)*
+- `1_Universal_Operating_Principles/Human_Control_Point_정책.md` *(v0.2.1 candidate — 10 escalation 트리거)*
+- `1_Universal_Operating_Principles/Non_Blocking_Execution_정책.md` *(v0.2.1 candidate — 작은 결정 비차단 + decision-queue)*
+- `1_Universal_Operating_Principles/Copy_Paste_Zero_로드맵.md` *(v0.2.1 candidate — Stage 1~5 진화 로드맵)*
+
+## Layer 2 — Reusable Workflow Modules
+- `2_Reusable_Workflow_Modules/00_Overview.md`
+- `2_Reusable_Workflow_Modules/_module_template.md`
+- `2_Reusable_Workflow_Modules/01_problem-framing/`
+- `2_Reusable_Workflow_Modules/02_research/`
+- `2_Reusable_Workflow_Modules/03_requirements/`
+- `2_Reusable_Workflow_Modules/04_architecture-planning/`
+- `2_Reusable_Workflow_Modules/05_implementation/`
+- `2_Reusable_Workflow_Modules/06_verification/` *(required: true)*
+- `2_Reusable_Workflow_Modules/07_risk-review/`
+- `2_Reusable_Workflow_Modules/08_launch/`
+- `2_Reusable_Workflow_Modules/09_metrics-review/`
+- `2_Reusable_Workflow_Modules/10_retrospective/`
+- `2_Reusable_Workflow_Modules/신규_프로젝트_생성_Workflow.md` *(v0.2.1 candidate — Foundry version 복사 → factory.yaml + meta/ 필수, 10단계)*
+- `2_Reusable_Workflow_Modules/Decision_Queue_운영방식.md` *(v0.2.1 candidate — DQ 8 컬럼, blocker 아님, batch review)*
+- `2_Reusable_Workflow_Modules/Meta_Sprint_Backport_Workflow.md` *(v0.2.1 candidate — 11단계, 사용자 최종 승인 게이트, self-test 회귀 보호)*
+
+## Layer 3 — Domain/Project Playbooks
+- `3_Domain_Project_Playbooks/00_Overview.md`
+- `3_Domain_Project_Playbooks/_template/README.md`
+- `3_Domain_Project_Playbooks/_template/domain-ontology.md`
+- `3_Domain_Project_Playbooks/ai-npi-platform/00_Project_Brief.md`
+- `3_Domain_Project_Playbooks/ai-npi-platform/domain-ontology.md`
+- `3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Brief.md` *(v0.2.0 — `schema_version: "0.2.0"` 추가됨; T-B9 self-test input)*
+- `3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Blueprint.md`
+- `3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Worklist.md`
+- `3_Domain_Project_Playbooks/ai-npi-platform/NPI_Verification.md` *(v0.2.0 — T-B9 self-test 산출, runner 자동 생성, 6/6 Pass)*
+
+## Layer 4 — Task-level Execution Templates
+- `4_Task_Level_Execution_Templates/00_Overview.md`
+- `4_Task_Level_Execution_Templates/프로젝트_meta_폴더_템플릿.md` *(v0.2.1 candidate — 6 파일 표준 + 통합 흐름)*
+- `4_Task_Level_Execution_Templates/factory_yaml_template.md` *(v0.2.1 candidate — factory_source / project / local_modifications + 권장 확장 필드)*
+- `4_Task_Level_Execution_Templates/NPI_Brief.md` *(≈ PRD; v0.2.0 — dual-form AC: prose + structured AC YAML with `schema_version: "0.2.0"` required)*
+- `4_Task_Level_Execution_Templates/NPI_Blueprint.md` *(≈ Plan/Architecture)*
+- `4_Task_Level_Execution_Templates/NPI_Worklist.md` *(≈ Tasks; Affected Objects optional per task)*
+- `4_Task_Level_Execution_Templates/NPI_BuildLog.md` *(≈ Walkthrough)*
+- `4_Task_Level_Execution_Templates/NPI_Verification.md` *(≈ QA; v0.2.0 — runner 가 자동 생성. 컬럼 = AC ID | Statement | Method | Result | Evidence)*
+- `4_Task_Level_Execution_Templates/NPI_Patchnote.md` *(≈ Hotfix)*
+
+## Layer 4 — Claude Code Harness (under L4)
+- `4_Task_Level_Execution_Templates/claude-code/README.md`
+- `4_Task_Level_Execution_Templates/claude-code/agents/README.md`
+- `4_Task_Level_Execution_Templates/claude-code/agents/agent-candidates.md`
+- `4_Task_Level_Execution_Templates/claude-code/agents/context-isolation-policy.md`
+
+### Commands
+- `4_Task_Level_Execution_Templates/claude-code/commands/scope-context.md`
+- `4_Task_Level_Execution_Templates/claude-code/commands/plan-work.md`
+- `4_Task_Level_Execution_Templates/claude-code/commands/execute-work.md`
+- `4_Task_Level_Execution_Templates/claude-code/commands/validate-output.md` *(v0.2.0 implemented — skill ↔ runner ↔ hook 3계층 호출)*
+- `4_Task_Level_Execution_Templates/claude-code/commands/review-risk.md`
+- `4_Task_Level_Execution_Templates/claude-code/commands/extract-lessons.md`
+- `4_Task_Level_Execution_Templates/claude-code/commands/ask-chatgpt-decision.md`
+
+### Skills
+- `4_Task_Level_Execution_Templates/claude-code/skills/README.md`
+- `4_Task_Level_Execution_Templates/claude-code/skills/skill-candidates.md` *(v0.2.0 — `verification-runner` 행을 implemented 로 격상)*
+- `4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/SKILL.md` *(v0.2.0 — 첫 implemented skill, 11개 섹션)*
+- `4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/README.md` *(runner 사용법)*
+- `4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/run.py` *(★ runner = single source of truth, Python 3.11+, stdlib-only)*
+- `4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/tests/fixture_pass.md` *(should-pass 회귀 fixture)*
+- `4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/tests/fixture_block.md` *(should-block 회귀 fixture)*
+
+### Hooks
+- `4_Task_Level_Execution_Templates/claude-code/hooks/README.md` *(v0.2.0 갱신 — before-final 섹션 추가)*
+- `4_Task_Level_Execution_Templates/claude-code/hooks/hook-candidates.md` *(v0.2.0 — `before-final` 행을 implemented 로 격상)*
+- `4_Task_Level_Execution_Templates/claude-code/hooks/before-final.ps1` *(v0.2.0 — PowerShell shim, ASCII 런타임 메시지)*
+- `4_Task_Level_Execution_Templates/claude-code/hooks/before-final.cmd` *(v0.2.0 — Windows cmd wrapper, ASCII-only)*
+
+### Worktree / MCP
+- `4_Task_Level_Execution_Templates/claude-code/worktree/README.md`
+- `4_Task_Level_Execution_Templates/claude-code/worktree/worktree-policy.md`
+- `4_Task_Level_Execution_Templates/claude-code/mcp/README.md`
+- `4_Task_Level_Execution_Templates/claude-code/mcp/mcp-connection-policy.md`
+
+## Bootstrap
+- `Bootstrap/How_To_Start_New_Project.md`
+- `Bootstrap/Naming_and_Conventions.md`
+
+## Ontology Index
+- Policy: `1_Universal_Operating_Principles/ontology-policy.md`
+- Template: `3_Domain_Project_Playbooks/_template/domain-ontology.md`
+- Instances:
+  - `ai-npi-platform`: `3_Domain_Project_Playbooks/ai-npi-platform/domain-ontology.md`

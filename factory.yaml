@@ -1,0 +1,175 @@
+factory:
+  name: ai-npi-factory
+  version: 0.2.0
+  status: frozen
+  frozen_on: 2026-05-08
+  previous_version: 0.1.0
+
+layers:
+  - id: L1
+    name: Universal Operating Principles
+    path: 1_Universal_Operating_Principles/
+  - id: L2
+    name: Reusable Workflow Modules
+    path: 2_Reusable_Workflow_Modules/
+  - id: L3
+    name: Domain/Project Playbooks
+    path: 3_Domain_Project_Playbooks/
+  - id: L4
+    name: Task-level Execution Templates
+    path: 4_Task_Level_Execution_Templates/
+
+doctrines:
+  acde:
+    name: Acceptance-Criteria-Driven Execution
+    rule: No execution without measurable, verifiable acceptance criteria.
+  minimum_human_intervention:
+    default_control_points: [start, final]
+    middle_default: automated
+    human_triggers:
+      - irreversible_change
+      - meaningful_scope_budget_schedule_change
+      - risk_level_upgrade
+      - acceptance_criteria_change
+
+modules:
+  - id: "01"
+    name: problem-framing
+    path: 2_Reusable_Workflow_Modules/01_problem-framing/
+    required: false
+  - id: "02"
+    name: research
+    path: 2_Reusable_Workflow_Modules/02_research/
+    required: false
+  - id: "03"
+    name: requirements
+    path: 2_Reusable_Workflow_Modules/03_requirements/
+    required: false
+  - id: "04"
+    name: architecture-planning
+    path: 2_Reusable_Workflow_Modules/04_architecture-planning/
+    required: false
+  - id: "05"
+    name: implementation
+    path: 2_Reusable_Workflow_Modules/05_implementation/
+    required: false
+  - id: "06"
+    name: verification
+    path: 2_Reusable_Workflow_Modules/06_verification/
+    required: true
+  - id: "07"
+    name: risk-review
+    path: 2_Reusable_Workflow_Modules/07_risk-review/
+    required: false
+  - id: "08"
+    name: launch
+    path: 2_Reusable_Workflow_Modules/08_launch/
+    required: false
+  - id: "09"
+    name: metrics-review
+    path: 2_Reusable_Workflow_Modules/09_metrics-review/
+    required: false
+  - id: "10"
+    name: retrospective
+    path: 2_Reusable_Workflow_Modules/10_retrospective/
+    required: false
+
+templates:
+  - id: NPI_Brief
+    path: 4_Task_Level_Execution_Templates/NPI_Brief.md
+    required_sections: [acceptance_criteria, affected_objects]
+  - id: NPI_Blueprint
+    path: 4_Task_Level_Execution_Templates/NPI_Blueprint.md
+  - id: NPI_Worklist
+    path: 4_Task_Level_Execution_Templates/NPI_Worklist.md
+    optional_sections: [affected_objects_per_task]
+  - id: NPI_BuildLog
+    path: 4_Task_Level_Execution_Templates/NPI_BuildLog.md
+  - id: NPI_Verification
+    path: 4_Task_Level_Execution_Templates/NPI_Verification.md
+    required_sections: [ac_to_verification_mapping]
+  - id: NPI_Patchnote
+    path: 4_Task_Level_Execution_Templates/NPI_Patchnote.md
+
+playbooks:
+  - id: ai-npi-platform
+    path: 3_Domain_Project_Playbooks/ai-npi-platform/
+
+harness:
+  claude_code:
+    root: 4_Task_Level_Execution_Templates/claude-code/
+    agents: true
+    commands: true
+    skills: implemented            # v0.2.0 — verification-runner 가 첫 implemented skill
+    hooks: implemented             # v0.2.0 — before-final 이 첫 implemented hook
+    worktree: true
+    mcp: planned
+    commands_list:
+      - id: scope-context
+        status: documented
+      - id: plan-work
+        status: documented
+      - id: execute-work
+        status: documented
+      - id: validate-output
+        status: implemented        # v0.2.0 — runner/skill/hook 3계층 호출 모델
+        version: 0.2.0
+      - id: review-risk
+        status: documented
+      - id: extract-lessons
+        status: documented
+      - id: ask-chatgpt-decision
+        status: documented
+    skills_implemented:
+      - id: verification-runner
+        path: 4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/
+        skill_md: 4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/SKILL.md
+        runner: 4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/run.py
+        readme: 4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/README.md
+        tests:
+          - 4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/tests/fixture_pass.md
+          - 4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/tests/fixture_block.md
+        since: 0.2.0
+    hooks_implemented:
+      - id: before-final
+        ps1: 4_Task_Level_Execution_Templates/claude-code/hooks/before-final.ps1
+        cmd: 4_Task_Level_Execution_Templates/claude-code/hooks/before-final.cmd
+        readme: 4_Task_Level_Execution_Templates/claude-code/hooks/README.md
+        category: verify
+        blocking_exit_codes: [1, 2]
+        since: 0.2.0
+
+runner:
+  validate_output:
+    host: python
+    version: "3.11+"
+    dependency_policy: stdlib-first
+    yaml_strategy: minimal-subset-self-parse
+    optional_dependency: pyyaml
+    hook_shim:
+      windows: [".ps1", ".cmd"]
+    schema_version_field: required
+    supported_schema_versions:
+      - "0.2.0"
+    schema_versioning_policy: semver
+    status: implemented            # v0.2.0 frozen — T-B2 구현, T-B9 self-test 통과
+    implemented_on: 2026-05-08
+    self_test:
+      brief: 3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Brief.md
+      result: PASS
+      counts: { total: 6, pass: 6, fail: 0 }
+      exit_code: 0
+      verification_artifact: 3_Domain_Project_Playbooks/ai-npi-platform/NPI_Verification.md
+    decided_on: 2026-05-08
+    decision_refs:
+      - "CHANGELOG.md#020---2026-05-08 (T-B1: host 언어)"
+      - "CHANGELOG.md#020---2026-05-08 (T-B8: schema_version)"
+
+ontology:
+  policy: 1_Universal_Operating_Principles/ontology-policy.md
+  template: 3_Domain_Project_Playbooks/_template/domain-ontology.md
+  object_naming: PascalCase
+  namespaces: false
+  instances:
+    - id: ai-npi-platform
+      path: 3_Domain_Project_Playbooks/ai-npi-platform/domain-ontology.md

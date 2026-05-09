@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment / secrets
+.env
+.env.*
+
+# Node / Next.js / build artifacts
+node_modules/
+.next/
+dist/
+build/

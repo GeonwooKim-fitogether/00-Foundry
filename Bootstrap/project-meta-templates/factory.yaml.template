@@ -1,0 +1,55 @@
+# 프로젝트 측 factory.yaml 템플릿
+# ==============================================================================
+# 본 파일은 *신규 프로젝트의 root* 에 `factory.yaml` 로 복사되어 사용된다.
+# 00-Foundry 자체의 factory.yaml 과는 별개의 *프로젝트 메타 전용* 파일이다.
+#
+# 사용:
+#   1. cp 00-Foundry/Bootstrap/project-meta-templates/factory.yaml.template <project>/factory.yaml
+#   2. 아래 placeholder 값을 채운다.
+#   3. project-owner 검토 후 git commit.
+# ==============================================================================
+
+# 본 프로젝트가 시작 시점에 사용한 Foundry 의 정확한 좌표.
+# 한 번 결정되면 *프로젝트 종료 시까지 변경하지 않는다.*
+# Foundry 의 새 version 으로 옮기려면 별도 Migration Critical Decision 으로 진행.
+factory_source:
+  repo: git@github.com:<owner>/00-Foundry.git    # 사용자의 Foundry GitHub URL
+  version: "0.2.0"                                # Foundry 의 Semver — 시작 시점 frozen
+  commit: <40-char-commit-sha>                    # frozen 시점 commit SHA (full)
+  copied_on: <YYYY-MM-DD>                         # 본 프로젝트가 만들어진 날짜
+
+# 프로젝트 정체성
+project:
+  name: <12.your-project-name>                    # 폴더명과 동일
+  type: <project-type>                            # saas-platform | dashboard | agent | library | …
+  owner: project-owner                            # 단일 사용자 모델 기본값
+  started_on: <YYYY-MM-DD>
+
+# Foundry 룰을 *국지적으로* 변경했는가?
+# - false (권장 기본값) — Foundry 원본 룰을 그대로 따른다.
+# - true              — meta/foundry-improvement-log.md 에 *반드시* 변경 사유 + 차이를 박제.
+#                       이 변경은 Meta Sprint 까지 보류된다 (즉시 Foundry 원본 변경 금지).
+local_modifications: false
+
+# meta/ 폴더 인벤토리 (모두 필수)
+# Meta Sprint 의 입력으로 사용된다.
+meta_artifacts:
+  improvement_log: meta/foundry-improvement-log.md
+  backport_candidates: meta/foundry-backport-candidates.md
+  decisions: meta/decisions.md
+  lessons_learned: meta/lessons-learned.md
+
+# 본 프로젝트의 NPI 산출물 위치 (디렉토리)
+ai_npi_root: ai-npi/
+
+# 본 프로젝트가 Foundry 의 어떤 검증 라인을 호출하는지 (참조 only — 사본 두지 않음)
+foundry_paths:
+  runner: ../00-Foundry/4_Task_Level_Execution_Templates/claude-code/skills/verification-runner/run.py
+  hook_ps1: ../00-Foundry/4_Task_Level_Execution_Templates/claude-code/hooks/before-final.ps1
+  hook_cmd: ../00-Foundry/4_Task_Level_Execution_Templates/claude-code/hooks/before-final.cmd
+  brief_template: ../00-Foundry/4_Task_Level_Execution_Templates/NPI_Brief.md
+
+# 변경 이력 (본 파일의)
+history:
+  - date: <YYYY-MM-DD>
+    note: "프로젝트 초기 생성. factory_source 박제."

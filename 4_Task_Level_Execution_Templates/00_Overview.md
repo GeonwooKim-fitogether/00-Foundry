@@ -1,0 +1,17 @@
+# L4 — Task-level Execution Templates (Overview)
+
+Factory-native templates. Instantiate per task; do not edit the template files for project-specific work.
+
+| Template | Role | Required Sections |
+|---|---|---|
+| `NPI_Brief.md` | Identity, problem, scope, AC | Acceptance Criteria, Affected Objects |
+| `NPI_Blueprint.md` | How it will be built (architecture/plan) | — |
+| `NPI_Worklist.md` | Decomposed tasks | Affected Objects per task is *optional* |
+| `NPI_BuildLog.md` | What was actually done and why | — |
+| `NPI_Verification.md` | Evidence that AC are met | AC ↔ Verification mapping |
+| `NPI_Patchnote.md` | Hotfix/patch record | — |
+
+## Conventions
+- AC must be measurable and verifiable. Given-When-Then recommended for code/feature work.
+- `Affected Objects` references entries in the Playbook's `domain-ontology.md` (PascalCase).
+- Pre-state AC; later changes go through Critical Decision (Human Control Point).
