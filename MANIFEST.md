@@ -1,8 +1,10 @@
-# MANIFEST — AI-NPI Factory v0.2.0
+﻿# MANIFEST — AI-NPI Factory v0.2.1
 
 Index of all artifacts in the 4-Layer Frame.
 
-> v0.2.0 frozen on 2026-05-08. validate-output runner implemented (`run.py`), `verification-runner` skill defined, `before-final` hook implemented. B-002 self-test passed (6/6, exit 0).
+> **v0.2.1 frozen on 2026-05-12** (elevated from candidate). validate-output runner implemented (`run.py`), `verification-runner` skill defined, `before-final` hook implemented. B-002 self-test 6/6 PASS + B-003 self-test 9/9 PASS (revalidated 2026-05-12). Field validation by `12.subscription-payment-saas-platform` Phase 1+2 (D-001~D-014 + FIL-001~008). 코드 변경 0 (정책/문서 add only).
+>
+> Prior: v0.2.0 frozen on 2026-05-08 (runner/skill/hook 첫 구현).
 
 ## Root
 - `README.md` — entry point
@@ -17,10 +19,10 @@ Index of all artifacts in the 4-Layer Frame.
 - `1_Universal_Operating_Principles/03_Scope_Management.md`
 - `1_Universal_Operating_Principles/04_Versioning_Principles.md`
 - `1_Universal_Operating_Principles/ontology-policy.md`
-- `1_Universal_Operating_Principles/GitHub_Foundry_관리정책.md` *(v0.2.1 candidate — Source of Truth + GitHub 단일 동기화 채널)*
-- `1_Universal_Operating_Principles/Human_Control_Point_정책.md` *(v0.2.1 candidate — 10 escalation 트리거)*
-- `1_Universal_Operating_Principles/Non_Blocking_Execution_정책.md` *(v0.2.1 candidate — 작은 결정 비차단 + decision-queue)*
-- `1_Universal_Operating_Principles/Copy_Paste_Zero_로드맵.md` *(v0.2.1 candidate — Stage 1~5 진화 로드맵)*
+- `1_Universal_Operating_Principles/GitHub_Foundry_관리정책.md` *(v0.2.1 frozen — Source of Truth + GitHub 단일 동기화 채널)*
+- `1_Universal_Operating_Principles/Human_Control_Point_정책.md` *(v0.2.1 frozen — 10 escalation 트리거)*
+- `1_Universal_Operating_Principles/Non_Blocking_Execution_정책.md` *(v0.2.1 frozen — 작은 결정 비차단 + decision-queue)*
+- `1_Universal_Operating_Principles/Copy_Paste_Zero_로드맵.md` *(v0.2.1 frozen — Stage 1~5 진화 로드맵)*
 
 ## Layer 2 — Reusable Workflow Modules
 - `2_Reusable_Workflow_Modules/00_Overview.md`
@@ -35,9 +37,9 @@ Index of all artifacts in the 4-Layer Frame.
 - `2_Reusable_Workflow_Modules/08_launch/`
 - `2_Reusable_Workflow_Modules/09_metrics-review/`
 - `2_Reusable_Workflow_Modules/10_retrospective/`
-- `2_Reusable_Workflow_Modules/신규_프로젝트_생성_Workflow.md` *(v0.2.1 candidate — Foundry version 복사 → factory.yaml + meta/ 필수, 10단계)*
-- `2_Reusable_Workflow_Modules/Decision_Queue_운영방식.md` *(v0.2.1 candidate — DQ 8 컬럼, blocker 아님, batch review)*
-- `2_Reusable_Workflow_Modules/Meta_Sprint_Backport_Workflow.md` *(v0.2.1 candidate — 11단계, 사용자 최종 승인 게이트, self-test 회귀 보호)*
+- `2_Reusable_Workflow_Modules/신규_프로젝트_생성_Workflow.md` *(v0.2.1 frozen — Foundry version 복사 → factory.yaml + meta/ 필수, 10단계)*
+- `2_Reusable_Workflow_Modules/Decision_Queue_운영방식.md` *(v0.2.1 frozen — DQ 8 컬럼, blocker 아님, batch review)*
+- `2_Reusable_Workflow_Modules/Meta_Sprint_Backport_Workflow.md` *(v0.2.1 frozen — 11단계, 사용자 최종 승인 게이트, self-test 회귀 보호)*
 
 ## Layer 3 — Domain/Project Playbooks
 - `3_Domain_Project_Playbooks/00_Overview.md`
@@ -48,12 +50,15 @@ Index of all artifacts in the 4-Layer Frame.
 - `3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Brief.md` *(v0.2.0 — `schema_version: "0.2.0"` 추가됨; T-B9 self-test input)*
 - `3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Blueprint.md`
 - `3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Worklist.md`
+- `3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Verification.md` *(v0.2.1 frozen — 2026-05-12 revalidation, runner 자동 생성, 6/6 PASS exit 0)*
+- `3_Domain_Project_Playbooks/ai-npi-platform/B-003_NPI_Brief.md` *(v0.2.1 — v0.2.1 candidate AC 9건 input)*
+- `3_Domain_Project_Playbooks/ai-npi-platform/B-003_NPI_Verification.md` *(v0.2.1 frozen — 2026-05-12 revalidation, runner 자동 생성, 9/9 PASS exit 0)*
 - `3_Domain_Project_Playbooks/ai-npi-platform/NPI_Verification.md` *(v0.2.0 — T-B9 self-test 산출, runner 자동 생성, 6/6 Pass)*
 
 ## Layer 4 — Task-level Execution Templates
 - `4_Task_Level_Execution_Templates/00_Overview.md`
-- `4_Task_Level_Execution_Templates/프로젝트_meta_폴더_템플릿.md` *(v0.2.1 candidate — 6 파일 표준 + 통합 흐름)*
-- `4_Task_Level_Execution_Templates/factory_yaml_template.md` *(v0.2.1 candidate — factory_source / project / local_modifications + 권장 확장 필드)*
+- `4_Task_Level_Execution_Templates/프로젝트_meta_폴더_템플릿.md` *(v0.2.1 frozen — 6 파일 표준 + 통합 흐름)*
+- `4_Task_Level_Execution_Templates/factory_yaml_template.md` *(v0.2.1 frozen — factory_source / project / local_modifications + 권장 확장 필드)*
 - `4_Task_Level_Execution_Templates/NPI_Brief.md` *(≈ PRD; v0.2.0 — dual-form AC: prose + structured AC YAML with `schema_version: "0.2.0"` required)*
 - `4_Task_Level_Execution_Templates/NPI_Blueprint.md` *(≈ Plan/Architecture)*
 - `4_Task_Level_Execution_Templates/NPI_Worklist.md` *(≈ Tasks; Affected Objects optional per task)*
@@ -99,7 +104,9 @@ Index of all artifacts in the 4-Layer Frame.
 
 ## Bootstrap
 - `Bootstrap/How_To_Start_New_Project.md`
+- `Bootstrap/How_To_Backport_Project_Lessons.md` *(v0.2.1 frozen — Meta Sprint Backport Workflow 11단계 인접 입문 문서)*
 - `Bootstrap/Naming_and_Conventions.md`
+- `Bootstrap/v0.2.1_Frozen_Elevation_Evidence.md` *(v0.2.1 frozen — 2026-05-12 frozen elevation 의 evidence bundle: project field validation metrics + D-001~D-014 + FIL-001~008 Tier 분류 + Operating Model v0.3/v0.3.1 backport 후보 + B-002/B-003 revalidation 결과)*
 
 ## Ontology Index
 - Policy: `1_Universal_Operating_Principles/ontology-policy.md`

@@ -2,11 +2,85 @@
 
 All notable changes to AI-NPI Factory. Versioning follows [Semver](https://semver.org/).
 
-## [v0.2.1] — Unreleased (candidate, 2026-05-08)
+## [v0.2.1] — Frozen 2026-05-12 (elevated from candidate)
 
 > **운영정책 update — Frame/runner/hook/skill 코드 변경 0, 정책/문서 add only.**
-> 본 candidate 는 Meta Sprint 절차 (실 데이터 누적 후) 를 거쳐 frozen 으로 격상된다.
-> 본 update 의 핵심: GitHub 단일 동기화 + 신규 프로젝트의 Foundry 좌표 박제 + Non-Blocking Execution + Decision Queue + Copy-Paste Zero 로드맵.
+> Field validation = `12.subscription-payment-saas-platform` Phase 1+2 (Phase 1 closure `3b8bc60` / Phase 2 closure `9b2967a` + post-F-002 closure `7a4fe2c` + D-014 documentation PR drafted). Operating data 충분 누적 → 2026-05-12 frozen elevation.
+> **Revalidation (2026-05-12)**: B-002 self-test 6/6 PASS (exit 0) + B-003 self-test 9/9 PASS (exit 0). 코드 변경 0 이므로 회귀 0 보장.
+> 본 v0.2.1 의 핵심: GitHub 단일 동기화 + 신규 프로젝트의 Foundry 좌표 박제 + Non-Blocking Execution + Decision Queue + Copy-Paste Zero 로드맵.
+
+### Frozen Elevation Entry (2026-05-12)
+
+- **Trigger**: `12.subscription-payment-saas-platform` Phase 1+2 cycle 종료 + D-001~D-014 + FIL-001~008 + Operating Model v0.2.1 → v0.3 → v0.3.1 까지의 evolution data 누적 + Director DQ-027 "(b)+(c) parallel" 결정 (D-014, 2026-05-12).
+- **Decision references (project repo, 12.subscription-payment-saas-platform)**:
+  - D-001 (2026-05-09) — Foundry seed = `d4455f08…` (v0.2.1 candidate) 채택
+  - D-002 (2026-05-09) — `local_modifications: true` 시작
+  - D-003 (2026-05-09) — F-001 Start CP 통과 + 7 modification (service_role banned 등)
+  - D-004 (2026-05-10) — F-001 offline scaffold phase 진입 (HCP partial unblock 패턴, FIL-001 origin)
+  - D-005 (2026-05-11) — T-1 HCP 회신 + H-001 Hotfix (React 18 hook 호환, FIL-002 origin)
+  - D-006 (2026-05-11) — Operating Model v0.2 합의 (4-Layer / Phase / F-ID / M-ID / Control Plane / Director View, FIL-003~006 origin)
+  - D-007 (2026-05-11) — AC-B gap path C+D approved (Conditionally Complete + §A.2.R Implementer-driven validation suite 패턴 원천, FIL-002 추가 영향)
+  - D-008 (2026-05-11) — F-001 Phase 1 closure (PR #1 squash → 3b8bc60)
+  - D-009 (2026-05-11) — DQ-018 closure + F-002 Spec drafted (Phase 2 진입 직전)
+  - D-010 (2026-05-11) — DD-PHASE-2-START approved with 8 explicit constraints (HCP boundary)
+  - D-011 (2026-05-11) — Operating Model v0.3 candidate 박제 (Reduced-copy Stage 2 + Calibrated Stage 3)
+  - D-012 (2026-05-12) — Director Naming Model clarification (Phase + WP-NNN / Meta Sprint + IP-NNN + Legacy Trace alias)
+  - D-013 (2026-05-12) — F-002 Final CP Accepted + Phase 2 closed + v0.3 frozen forward-port executed (PR #12 → 7a4fe2c)
+  - D-014 (2026-05-12) — DQ-027 RESOLVED (b)+(c) parallel + Naming Model improvement (Brief→Spec / Blueprint→Design) + WP-002 file rename + Meta Sprint 1 진입 + v0.3.1 additive patch (project repo PR #13 drafted)
+- **Foundry Improvement Log references (project repo, 12.subscription-payment-saas-platform)**:
+  - FIL-001 — 단일-키 HCP 가 cycle 전체 차단 안티패턴 → HCP partial-block 분리 패턴 제안 (D-004 패턴 일반화)
+  - FIL-002 — AC-A mock 단위 테스트가 React 18/19 hook 호환성 검증 누락 → AC-Offline 에 dev server boot smoke test 추가 제안 (H-001 원인)
+  - FIL-003 — Project Control Plane 과 Meta Backlog 분리 부재 → `control/` vs `meta/` 폴더 분리 후보
+  - FIL-004 — Director View 자동화 부재 → DirectorView_schema.yaml + generator 후보
+  - FIL-005 — Feature/Work Package ID 메타데이터 표준 부재 → NPI_Brief 템플릿 §0 4 필드 강제 (Purpose / Goal / Project Relevance / Non-Goals)
+  - FIL-006 — 4-Layer 가 implementation folder hierarchy 로 오용 위험 → README + MANIFEST 에 비역할 1 단락 추가 제안
+  - FIL-007 — vi.mock 팩토리의 TDZ → `vi.hoisted` 표준 mock 패턴 박제 제안
+  - FIL-008 — Windows `desktop.ini` 가 `.git/refs/` 트리에 침투 → `scripts/git-cleanup.mjs` + `pnpm git:cleanup` 자동화 제안 (현재 cycle 에서 1차 발생)
+- **Project field validation metrics**:
+  - PRs merged in project repo: #1~#12 (Phase 1 + dashboard + planning + F-002 cycle + D-013 closure). 본 cycle 중 PR #13 (D-014 documentation) = drafted.
+  - Decision queue: DQ-001 ~ DQ-029 누적 (3 결번, 그 외 모두 박제).
+  - Hotfix: H-001 (React 18 hook 호환).
+  - Tests in product code: 52/52 PASS (auth 6 + sub-state 13 + perms 13 + payment 11 + actions 9).
+  - Migration applied: 1 (`20260512000000_phase2_subscription_domain.sql`).
+- **Operating Model evolution captured (project repo)**:
+  - v0.2 (2026-05-11, D-006) — 4-Layer / Phase / F-ID / M-ID / Control Plane / Director View 정의
+  - v0.2.1 (2026-05-11) — Context Hygiene Pass (Roles 표 + Decision Type Classification 4 단계)
+  - v0.2.2 (2026-05-11) — Context Hygiene Pass II (§10 Reporting Discipline + Director Card 형식)
+  - v0.3 (2026-05-12 frozen, D-013) — Reduced-copy Stage 2 + Calibrated Stage 3 + Director-facing Naming Model
+  - v0.3.1 (2026-05-12 additive patch, D-014) — Document Terminology Map (Brief→Spec / Blueprint→Design / Worklist unchanged / Verification unchanged) + File Rename Map + Meta Sprint planning entry pattern
+
+### Frozen Elevation Verification (2026-05-12)
+
+- **B-002 self-test (T-B9 회귀 보호)**:
+  - `python run.py --brief 3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Brief.md`
+  - Result: **PASS** (total=6 pass=6 fail=0 exit=0).
+  - Artifact: [`3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Verification.md`](3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Verification.md) (신규, runner 자동 생성).
+- **B-003 self-test (v0.2.1 candidate AC 9건 회귀 보호)**:
+  - `python run.py --brief 3_Domain_Project_Playbooks/ai-npi-platform/B-003_NPI_Brief.md`
+  - Result: **PASS** (total=9 pass=9 fail=0 exit=0).
+  - Artifact: [`3_Domain_Project_Playbooks/ai-npi-platform/B-003_NPI_Verification.md`](3_Domain_Project_Playbooks/ai-npi-platform/B-003_NPI_Verification.md) (갱신, runner 자동 생성).
+  - AC-7 / AC-8 / AC-9 = "CHANGELOG / README / MANIFEST 에 v0.2.1 존재" — 본 frozen elevation 후에도 모두 PASS (frozen 표기는 candidate 표기를 *대체* 하지만 substring `v0.2.1` 는 유지).
+- **회귀 보호**: 본 v0.2.1 frozen elevation = 정책/문서 변경 only. Frame / runner / hook / skill 코드 변경 0. 따라서 두 self-test 모두 PASS 가 자연 결과.
+
+### Field Validation Evidence (post-Frozen)
+
+자세한 backport candidates + Phase 1+2 operating data + IP 후보 정리는 별도 evidence 문서로 박제:
+
+- [`Bootstrap/v0.2.1_Frozen_Elevation_Evidence.md`](Bootstrap/v0.2.1_Frozen_Elevation_Evidence.md) (신규, 본 frozen elevation 의 single source of truth)
+
+본 evidence 문서는 (a) 12.subscription-payment-saas-platform Phase 1+2 cycle metrics (b) D-001~D-014 짧은 요약 (c) FIL-001~008 backport candidate 분류 (Tier 1 / Tier 2 / Tier 3) (d) Meta Sprint 1 의 IP-001/002/003 candidate (e) Operating Model v0.3 / v0.3.1 의 Foundry 측 backport 후보를 모두 포함.
+
+### Not Changed in this Frozen Elevation (의도적)
+
+- `factory.yaml.factory.version` 만 `0.2.0` → `0.2.1` 로 bump + `status: frozen` + `frozen_on: 2026-05-12` + `previous_version: 0.2.0` + `elevation_evidence` 블록 추가.
+- runner (`run.py`) / hook (`before-final.ps1` / `before-final.cmd`) / skill (`SKILL.md` + `README.md`) / NPI_Brief 템플릿 / B-002 산출물 — 모두 손대지 않음 (정책 변경 0).
+- L1 / L2 / L4 의 v0.2.1 candidate 정책 문서 — 본문 변경 0. MANIFEST.md 의 annotation 만 "candidate" → "frozen".
+- Bootstrap/How_To_* 문서 — 보존.
+
+### 다음 단계 (Foundry 측)
+
+- 본 PR 머지 후 Foundry repo tag `v0.2.1` 부여 (Meta Sprint Backport Workflow §9 정합).
+- v0.3.0 candidate 후보 = Meta Sprint 1 (project repo 의 IP-001/002/003) 의 구현 완료 + Foundry 측 backport 채택 시점. 본 v0.2.1 frozen 까지는 *정책/문서 + field validation* 만, *구현 코드* 는 v0.3.0 candidate 부터.
 
 ### Added — L1 Universal Operating Principles (4)
 - [GitHub_Foundry_관리정책.md](1_Universal_Operating_Principles/GitHub_Foundry_관리정책.md) — 00-Foundry 가 Source of Truth. GitHub clone/pull/commit/push 단일 동기화 채널. 안정 version 은 tag 또는 frozen. 신규 프로젝트는 source version+commit SHA 박제. 추적되지 않는 로컬 변경 지양. 위반 신호 체크리스트.

@@ -1,9 +1,18 @@
 factory:
   name: ai-npi-factory
-  version: 0.2.0
+  version: 0.2.1
   status: frozen
-  frozen_on: 2026-05-08
-  previous_version: 0.1.0
+  frozen_on: 2026-05-12
+  previous_version: 0.2.0
+  elevation_evidence:
+    field_validation_project: 12.subscription-payment-saas-platform
+    phase_1_closure_sha: 3b8bc60
+    phase_2_closure_sha: 9b2967a
+    operating_model_data: D-001..D-014 + FIL-001..FIL-008
+    revalidation:
+      b002_self_test: PASS (6/6, exit 0, 2026-05-12)
+      b003_self_test: PASS (9/9, exit 0, 2026-05-12)
+    project_repo_pr_d014: https://github.com/GeonwooKim-fitogether/12.subscription-payment-saas-platform/pull/13
 
 layers:
   - id: L1
