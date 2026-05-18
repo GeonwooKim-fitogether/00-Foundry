@@ -2,11 +2,11 @@
 
 All notable changes to AI-NPI Factory. Versioning follows [Semver](https://semver.org/).
 
-## [v0.3.0] — Candidate 2026-05-18 (Director Acceptance pending)
+## [v0.3.0] — Frozen 2026-05-18
 
 > **운영정책 update — Frame/runner/hook/skill 코드 변경 0, 정책/문서 add only.**
-> v0.2.1 frozen 위에 *추가* (regression 0). Field validation = `12.subscription-payment-saas-platform` Phase 1~5 (WP-002 ~ WP-005, D-015~D-025 + FIL-009~014 누적). Operating data 충분 누적 → 본 v0.3.0 candidate 박제.
-> **Revalidation pending**: B-002 self-test (6 AC) + B-003 self-test (9 AC) — Director Acceptance 직전 1회 회귀 보호.
+> v0.2.1 frozen 위에 *추가* (regression 0). Field validation = `12.subscription-payment-saas-platform` Phase 1~5 (WP-002 ~ WP-005, D-015~D-025 + FIL-009~014 누적). Operating data 충분 누적 → 본 v0.3.0 frozen 박제.
+> **Revalidation PASS** (2026-05-18, Director Acceptance 직전): B-002 self-test **6/6 PASS exit 0** + B-003 self-test **9/9 PASS exit 0** + v0.3.0 self-check **12/12 PASS** (file_exists + version_match). Director Acceptance phrase: **"Foundry v0.3.0 PASS"** (Director 김건우, 2026-05-18).
 > 본 v0.3.0 의 핵심: **Director Card 4약속 강화 (조건 A/B/C/D)** + **D-025 next-cycle 자율 default amendment** + **Foundry FIL Ledger 신설 (FIL-008 cleanup script 표준화 + FIL-NEW .env.local worktree + FIL-WP005-pattern frozen 1-block addition)**.
 
 ### Candidate Trigger (2026-05-18)
