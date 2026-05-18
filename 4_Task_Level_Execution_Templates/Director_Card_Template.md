@@ -1,6 +1,6 @@
 # Director Card Template
 
-**Status**: Standard v1.0 · Authored 2026-05-16 · Source: WP-004 T-25 retrospective on `12.subscription-payment-saas-platform`
+**Status**: Standard v1.1 candidate (v0.3.0) · Authored 2026-05-16 · v1.1 amendment 2026-05-18 · Source: WP-004 T-25 retrospective + D-024 reinforcement (조건 A/B/C/D) on `12.subscription-payment-saas-platform`
 
 Director Card는 Director가 HCP(High Consequence Point) 또는 Director-only 행동을 직접 수행해야 할 때 Implementer가 발급하는 단일 실행 카드다. **카드 한 장으로 Director가 PASS/FAIL 결론까지 도달**해야 한다.
 
@@ -61,19 +61,65 @@ PREQ: [선행 조건 — 예: "T-X PASS"]
 
 ---
 
+## 추가 조건 A/B/C/D (v1.1, D-024 강화)
+
+4약속이 *Director 가 안 해야 하는 것* 의 negative-axis 라면, 본 추가 조건은 카드 *발급 가능성* 의 positive-axis 다. 카드가 다음 4 조건을 *모두* 만족해야 한다.
+
+### 조건 A — 맥락 무지 가정
+
+카드는 *Director 가 이전 스크린샷 / 이전 카드 / 이전 chat 창 / 이전 코드 변경* 을 *전혀 모른다* 는 가정 위에 작성된다.
+
+- ❌ "이전 카드의 결과를 참고하여..."
+- ❌ "T-23 에서 본 것처럼..."
+- ❌ "여기 첨부한 스크린샷의 X 를..."
+- ✅ 필요한 모든 사실은 카드 본문에 *재진술* (PREQ 라인 + 명령 블록 직전 1줄 컨텍스트).
+
+### 조건 B — Implementer 가 할 수 있는 모든 step 분리
+
+Director 위임 가능한 step 은 *오직 Director-only 행동* (HCP / 외부 SaaS 손길 / 보안 키 / 비가역 결정 / 브라우저 UI 조작 / 결제 등) 만. Implementer 가 *기술적으로 할 수 있는* 모든 step (git / npm / build / 로컬 검증 / file edit / migration SQL 작성 등) 은 카드 발급 *전에* Implementer 가 끝낸다.
+
+- ❌ "Director 가 `git pull` 후 `npm test` 실행"
+- ❌ "Director 가 검증 script 돌려서 결과 paste"
+- ✅ Implementer 가 이미 `git pull` + `npm test` 통과한 상태에서, Director-only 브라우저 시연/결제 시연/Dashboard 클릭만 위임.
+
+> 위반 신호: 카드에 git/npm/pnpm/build/test/lint 류 명령이 등장하면 99% 잘못 설계.
+
+### 조건 C — GPT orchestrator 통과 가능성
+
+Director → GPT(orchestrator) → Claude(Implementer) 3-layer 협업 모델에서, Director 가 카드를 그대로 GPT 에게 paste 했을 때 GPT 가 *재해석/번역/추가 질문 없이* Director-action 한 줄로 환원할 수 있어야 한다.
+
+- ❌ 카드 안에 GPT 전용 자연어 prompt 혹은 ChatGPT decision request 가 섞임
+- ❌ 카드 결론이 "Director 가 GPT 와 의논 후 결정" 으로 끝남 — GPT 가 결정 layer 가 아님
+- ✅ 카드는 Director 가 *혼자서* (또는 GPT 가 단순 paste 중계 1회만 거치고) PASS/FAIL 결론까지 도달.
+
+### 조건 D — Vim/Emacs/창 식별/bash 가정 명령 금지
+
+다음 가정은 Director 환경 boundary 를 모름.
+
+- ❌ Vim/Emacs 의 `:wq` / `Ctrl-X Ctrl-S` 같은 편집기 키 시퀀스
+- ❌ "터미널 창 ② 에서..." / "창 ① 의 결과를..." 같은 *Director 가 다중창을 관리* 하는 가정
+- ❌ `cat` / `grep` / `sed` / `awk` 등 bash 가정 명령 (PowerShell 5.1 환경에서 alias 가 있더라도 동작 변종 발생)
+- ❌ `&&` / `||` / `2>&1` 등 PowerShell 5.1 비호환 chain 연산자
+- ✅ 단일 PowerShell 5.1 호환 블록 + Windows 기본 `notepad` 호출 (편집 필요 시) + 한 창 가정.
+
+---
+
 ## Implementer 사전 self-audit 체크리스트
 
 카드 발급 전 Implementer가 self-verify:
 
-- [ ] 카드 한 장 안에 모든 정보 포함 (이전 대화 참조 0)
+- [ ] 카드 한 장 안에 모든 정보 포함 (이전 대화 참조 0) **[조건 A]**
 - [ ] 명령 블록이 한 덩어리 복붙 단위 (Director가 중간 편집 0)
-- [ ] 셸/OS 변동성 사전 흡수 (PowerShell 5.1, Bash, zsh 다 OK)
+- [ ] 셸/OS 변동성 사전 흡수 (PowerShell 5.1 호환 — `&&` / `||` / `??` / `2>&1` / bash 가정 명령 0) **[조건 D]**
 - [ ] 환경 변수 의존 사전 감지 (예: PATH에 `pnpm` 없으면 `npm`으로 통일)
 - [ ] Director가 메커니즘 모르고도 PASS/FAIL 판단 가능
 - [ ] FAIL 출력이 자동으로 진단 정보 포함 (서버 콘솔 etc.)
 - [ ] PASS phrase가 정확히 한 줄
 - [ ] 금지 항목 1~3개로 압축 (일반 보안 reminder 제거)
 - [ ] Secret/credential의 chat 노출 가능성 0 (`$secret` 직접 echo 금지)
+- [ ] git/npm/build/test/lint 류 *기술적 자동화 가능* step 0 — Implementer 가 카드 발급 *전에* 모두 끝냈는가? **[조건 B]**
+- [ ] GPT(orchestrator) 가 단순 paste 중계만으로 Director-action 한 줄로 환원 가능한가? **[조건 C]**
+- [ ] 단일창 가정 / 다중창 관리 부담 0 **[조건 D]**
 
 체크 미통과 항목이 있으면 카드 발급 보류 + 흡수 → 재발급.
 

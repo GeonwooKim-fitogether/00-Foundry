@@ -56,5 +56,16 @@ Claude 가 즉시 결정할 때는 *기본값* 을 명확히 채택한다. 기�
 - Critical Decision (L1/01의 4가지: 되돌리기 어려운 변경 / 의미 있는 스코프-예산-일정 변경 / 리스크 등급 상향 / AC 변경).
 - 파괴적 명령 (DB drop, force push, 본 정책서 §"Executing actions with care").
 
+## 8. Next cycle 선택의 비차단 (v0.3.0 amendment, D-025)
+
+Stage 2 reduced-copy mode (Operating Model v0.3+) 의 자연 연장: **next cycle 의 선택 자체도 Implementer 자율 default**.
+
+- non-HCP scope 내 다음 작업 단위 진입 = Director Card 발급 0. Implementer 가 자율 진입.
+- HCP gate / Final CP / scope drift 만 Director Card.
+- 우선순위 휴리스틱 (동등 후보일 때만 적용): `deferred 제외` > `Foundry backport` > `planning draft` > `follow-up` > `HCP-only 카드` (마지막).
+- 자세한 표준: [`4_Task_Level_Execution_Templates/Next_Cycle_Selection_Rule.md`](../4_Task_Level_Execution_Templates/Next_Cycle_Selection_Rule.md).
+- 본 amendment 는 v0.2.x 일부 cycle 에서 운용되던 **D-017** ("Implementer 가 next-cycle 후보 자발 제시 금지") 를 **폐기**.
+
 ## 변경 이력
 - v0.2.1 candidate (2026-05-08) — 신설.
+- v0.3.0 candidate (2026-05-18) — §8 Next cycle 비차단 추가 (D-025 amendment, source: 12.subscription-payment-saas-platform Phase 1~5).

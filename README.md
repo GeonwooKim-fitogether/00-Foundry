@@ -2,9 +2,10 @@
 
 Reusable meta-platform for starting and running AI New Product Introduction (NPI) projects on a shared 4-Layer skeleton.
 
-- **Version**: **0.2.1 (frozen)** — elevated from candidate on 2026-05-12.
+- **Version**: **0.2.1 (frozen)** + **0.3.0 (candidate, Director Acceptance pending 2026-05-18)**.
 - **Status**: 0.2.1 frozen — Phase 1+2 field validation by `12.subscription-payment-saas-platform` (Phase 1 closure `3b8bc60` / Phase 2 closure `9b2967a` / D-001~D-014 + FIL-001~008). Revalidation: B-002 self-test 6/6 PASS · B-003 self-test 9/9 PASS (2026-05-12). 정책/문서 add only — Frame/runner/hook/skill 코드 변경 0.
   v0.2.1 핵심: GitHub 기반 Foundry 관리 + 신규 프로젝트 / meta 폴더 / Non-Blocking Execution / Human Control Point / Decision Queue / Meta Sprint / Copy-Paste Zero 로드맵 정책 + Phase 1+2 운영 데이터 누적 (backport candidates: `Bootstrap/v0.2.1_Frozen_Elevation_Evidence.md`).
+- **0.3.0 candidate (draft)**: Director Card Template v1.1 (4약속 + 조건 A/B/C/D) + Next Cycle Selection Rule (D-025 amendment, D-017 폐기) + Foundry FIL Ledger 신설 (FIL-008 cleanup script 표준 + FIL-NEW `.env.local` worktree + FIL-WP005-pattern frozen 1-block addition) + Non_Blocking_Execution_정책 §8 amendment. Field validation = `12.subscription-payment-saas-platform` Phase 1~5 (WP-002~005, D-015~D-025 + FIL-009~014). Director-facing summary: `Bootstrap/v0.3.0_Candidate_Elevation_Summary.md`.
 
 > Note: This folder previously hosted the "Foundry" meta-improvement notes (`PRD.md`, `Backlog.md`, `STATUS.md`, `Reading_List.md`). Those are retained as legacy inputs. The AI-NPI Factory structure below is the new authoritative skeleton.
 
