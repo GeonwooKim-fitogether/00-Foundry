@@ -1,10 +1,10 @@
-﻿# MANIFEST — AI-NPI Factory v0.2.1
+﻿# MANIFEST — AI-NPI Factory v0.3.0 candidate
 
 Index of all artifacts in the 4-Layer Frame.
 
-> **v0.2.1 frozen on 2026-05-12** (elevated from candidate). validate-output runner implemented (`run.py`), `verification-runner` skill defined, `before-final` hook implemented. B-002 self-test 6/6 PASS + B-003 self-test 9/9 PASS (revalidated 2026-05-12). Field validation by `12.subscription-payment-saas-platform` Phase 1+2 (D-001~D-014 + FIL-001~008). 코드 변경 0 (정책/문서 add only).
+> **v0.3.0 candidate (2026-05-18, draft)** — v0.2.1 frozen 위에 *추가* (Frame/runner/hook/skill 코드 변경 0, 정책/문서 add only). 본 candidate 의 trigger = source project `12.subscription-payment-saas-platform` Phase 1~5 closure (WP-002 ~ WP-005, D-015~D-025 + FIL-009~014 누적). 채택 항목: Director Card Template v1.1 (조건 A/B/C/D) + Next Cycle Selection Rule (D-025) + Foundry FIL Ledger (FIL-008 cleanup script 표준 + FIL-NEW .env.local worktree + FIL-WP005-pattern frozen 1-block addition) + Non_Blocking_Execution_정책 §8 amendment. Director Acceptance pending.
 >
-> Prior: v0.2.0 frozen on 2026-05-08 (runner/skill/hook 첫 구현).
+> Prior: v0.2.1 frozen on 2026-05-12 (Phase 1+2 field validation, D-001~D-014 + FIL-001~008). v0.2.0 frozen on 2026-05-08 (runner/skill/hook 첫 구현).
 
 ## Root
 - `README.md` — entry point
@@ -21,7 +21,7 @@ Index of all artifacts in the 4-Layer Frame.
 - `1_Universal_Operating_Principles/ontology-policy.md`
 - `1_Universal_Operating_Principles/GitHub_Foundry_관리정책.md` *(v0.2.1 frozen — Source of Truth + GitHub 단일 동기화 채널)*
 - `1_Universal_Operating_Principles/Human_Control_Point_정책.md` *(v0.2.1 frozen — 10 escalation 트리거)*
-- `1_Universal_Operating_Principles/Non_Blocking_Execution_정책.md` *(v0.2.1 frozen — 작은 결정 비차단 + decision-queue)*
+- `1_Universal_Operating_Principles/Non_Blocking_Execution_정책.md` *(v0.2.1 frozen + v0.3.0 candidate amendment §8 — next cycle 선택 비차단 / D-025)*
 - `1_Universal_Operating_Principles/Copy_Paste_Zero_로드맵.md` *(v0.2.1 frozen — Stage 1~5 진화 로드맵)*
 
 ## Layer 2 — Reusable Workflow Modules
@@ -59,6 +59,8 @@ Index of all artifacts in the 4-Layer Frame.
 - `4_Task_Level_Execution_Templates/00_Overview.md`
 - `4_Task_Level_Execution_Templates/프로젝트_meta_폴더_템플릿.md` *(v0.2.1 frozen — 6 파일 표준 + 통합 흐름)*
 - `4_Task_Level_Execution_Templates/factory_yaml_template.md` *(v0.2.1 frozen — factory_source / project / local_modifications + 권장 확장 필드)*
+- `4_Task_Level_Execution_Templates/Director_Card_Template.md` *(v1.1 candidate, v0.3.0 — 4약속 + 추가 조건 A/B/C/D, source: WP-004 T-25 + D-024)*
+- `4_Task_Level_Execution_Templates/Next_Cycle_Selection_Rule.md` *(v1.0 candidate, v0.3.0 — D-025 amendment, D-017 폐기, Implementer 자율 default)*
 - `4_Task_Level_Execution_Templates/NPI_Brief.md` *(≈ PRD; v0.2.0 — dual-form AC: prose + structured AC YAML with `schema_version: "0.2.0"` required)*
 - `4_Task_Level_Execution_Templates/NPI_Blueprint.md` *(≈ Plan/Architecture)*
 - `4_Task_Level_Execution_Templates/NPI_Worklist.md` *(≈ Tasks; Affected Objects optional per task)*
@@ -107,6 +109,8 @@ Index of all artifacts in the 4-Layer Frame.
 - `Bootstrap/How_To_Backport_Project_Lessons.md` *(v0.2.1 frozen — Meta Sprint Backport Workflow 11단계 인접 입문 문서)*
 - `Bootstrap/Naming_and_Conventions.md`
 - `Bootstrap/v0.2.1_Frozen_Elevation_Evidence.md` *(v0.2.1 frozen — 2026-05-12 frozen elevation 의 evidence bundle: project field validation metrics + D-001~D-014 + FIL-001~008 Tier 분류 + Operating Model v0.3/v0.3.1 backport 후보 + B-002/B-003 revalidation 결과)*
+- `Bootstrap/Foundry_FIL_Ledger.md` *(v0.3.0 candidate — adopted FIL entry 박제: FIL-008 cleanup script 표준 + FIL-NEW .env.local worktree + FIL-WP005-pattern frozen 1-block addition)*
+- `Bootstrap/v0.3.0_Candidate_Elevation_Summary.md` *(v0.3.0 candidate — Director-facing 5 spot summary, Director Acceptance pending)*
 
 ## Ontology Index
 - Policy: `1_Universal_Operating_Principles/ontology-policy.md`

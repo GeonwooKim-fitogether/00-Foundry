@@ -2,6 +2,77 @@
 
 All notable changes to AI-NPI Factory. Versioning follows [Semver](https://semver.org/).
 
+## [v0.3.0] — Candidate 2026-05-18 (Director Acceptance pending)
+
+> **운영정책 update — Frame/runner/hook/skill 코드 변경 0, 정책/문서 add only.**
+> v0.2.1 frozen 위에 *추가* (regression 0). Field validation = `12.subscription-payment-saas-platform` Phase 1~5 (WP-002 ~ WP-005, D-015~D-025 + FIL-009~014 누적). Operating data 충분 누적 → 본 v0.3.0 candidate 박제.
+> **Revalidation pending**: B-002 self-test (6 AC) + B-003 self-test (9 AC) — Director Acceptance 직전 1회 회귀 보호.
+> 본 v0.3.0 의 핵심: **Director Card 4약속 강화 (조건 A/B/C/D)** + **D-025 next-cycle 자율 default amendment** + **Foundry FIL Ledger 신설 (FIL-008 cleanup script 표준화 + FIL-NEW .env.local worktree + FIL-WP005-pattern frozen 1-block addition)**.
+
+### Candidate Trigger (2026-05-18)
+
+- **Source cycle closure**: `12.subscription-payment-saas-platform` Phase 1~5 누적 (Phase 3 = WP-003 TossPayments, Phase 4 = WP-004 BillingCycle, Phase 5 = WP-005 Invoice Planning closed via D-023). D-014 ~ D-025 + FIL-009 ~ FIL-014 누적.
+- **Decision references (source project)**:
+  - D-021 후보 — Director Card 4약속 v1.0 (Foundry PR #2 squash `8324668` 으로 v0.2.1 위에 *forward-port* 완료, instance: 12.subscription `meta/director-card-template.md`).
+  - D-022 (2026-05-16) — WP-004 Phase 4 CLOSED, Director Card 4약속 v1.0 first instance batch (T-25 v4 채택).
+  - D-023 (2026-05-17) — WP-005 Planning Final CP Accepted · Phase 5 Planning CLOSED (read-mostly Invoice 도메인, frozen 1-block addition 패턴 first instance).
+  - D-024 (예정 박제, 본 v0.3.0 backport 의 source) — Director Card 추가 조건 A/B/C/D 강화 (맥락 무지 / Implementer step 분리 / GPT orchestrator 통과 / bash+다중창 가정 금지).
+  - D-025 (예정 박제, 본 v0.3.0 backport 의 source) — Next cycle 선택 = Implementer 자율 default. D-017 폐기. 우선순위 휴리스틱 5단계.
+
+### Added — L4 Task-level Execution Templates (1 new + 1 amendment)
+
+- [4_Task_Level_Execution_Templates/Next_Cycle_Selection_Rule.md](4_Task_Level_Execution_Templates/Next_Cycle_Selection_Rule.md) *(v1.0 candidate)* — Next cycle 선택의 Implementer 자율 default. D-017 폐기. 우선순위 휴리스틱: `deferred 제외` > `Foundry backport` > `planning draft` > `follow-up` > `HCP-only 카드` (마지막). reduced-copy Stage 2 의 자연 연장.
+- [4_Task_Level_Execution_Templates/Director_Card_Template.md](4_Task_Level_Execution_Templates/Director_Card_Template.md) *(v1.0 → v1.1 candidate amendment)* — 4약속 (읽기/판단/디버깅/메커니즘 부담 0) 위에 **추가 조건 A/B/C/D**:
+  - **조건 A** — 맥락 무지 가정 (이전 스크린샷 / 카드 / chat / 코드 변경 참조 0).
+  - **조건 B** — Implementer 가 할 수 있는 모든 step (git / npm / build / test / lint) 은 카드 발급 *전* 에 흡수. Director 위임 = Director-only 행동 only.
+  - **조건 C** — GPT(orchestrator) 가 단순 paste 중계만으로 Director-action 한 줄로 환원 가능.
+  - **조건 D** — Vim/Emacs / 창 식별 / bash 가정 명령 / PowerShell 5.1 비호환 chain 연산자 (`&&`, `||`, `2>&1`) 금지.
+- Self-audit 체크리스트 9 → 12 항목 확장 (조건 A/B/C/D 관련 3 항목 추가).
+
+### Added — L1 Universal Operating Principles (1 amendment)
+
+- [1_Universal_Operating_Principles/Non_Blocking_Execution_정책.md](1_Universal_Operating_Principles/Non_Blocking_Execution_정책.md) §8 *(v0.3.0 candidate amendment)* — Next cycle 선택의 비차단. D-025 cross-ref. D-017 폐기 명시. 자세한 표준은 L4 `Next_Cycle_Selection_Rule.md`.
+
+### Added — Bootstrap (2)
+
+- [Bootstrap/Foundry_FIL_Ledger.md](Bootstrap/Foundry_FIL_Ledger.md) *(v0.3.0 candidate, 신설)* — Foundry 표준으로 *채택된* FIL 만 박제하는 ledger. 본 v0.3.0 채택 3 entry:
+  - **FIL-008** — Windows `desktop.ini` post-merge `.git` 트리 침투. 표준 cleanup 스크립트 박제 (`$g = git rev-parse --git-common-dir; Get-ChildItem $g -Recurse -Force -Filter "desktop.ini" | Remove-Item -Force`). 재현 N=7+ (Foundry main repo 자체에서도 본 cycle 중 재발 → 동일 스크립트로 해소).
+  - **FIL-NEW (FIL-014 후보)** — agent worktree 의 `.env.local` 부재로 validate/test ENOENT. Implementer 가 main worktree 에서 *읽기-전용 복사* (Director Card 발급 0). secret 노출 anti-pattern 명시.
+  - **FIL-WP005-pattern** — read-mostly cycle 의 frozen file *1-block addition* Director-gated extension 패턴 (WP-005 가 WP-003/004 frozen RPC bundle 확장한 모델, D-023 first instance).
+- [Bootstrap/v0.3.0_Candidate_Elevation_Summary.md](Bootstrap/v0.3.0_Candidate_Elevation_Summary.md) *(v0.3.0 candidate, 신설)* — Director-facing 5 spot summary. Director Acceptance 직전 단일 진입점.
+
+### Changed
+
+- [MANIFEST.md](MANIFEST.md) — header 가 v0.2.1 frozen → v0.3.0 candidate 로 표기 변경. L4 섹션에 2 신규 (Director Card v1.1 + Next Cycle Selection Rule). Bootstrap 섹션에 2 신규 (FIL Ledger + Candidate Elevation Summary). L1 Non_Blocking 항목에 v0.3.0 amendment 표기.
+
+### Not Changed in this candidate (의도적)
+
+- `factory.yaml.factory.version` — 여전히 `0.2.1` frozen. 본 v0.3.0 = *candidate* 단계, frozen 격상 시점에 bump.
+- runner (`run.py`) / hook (`before-final.ps1` / `before-final.cmd`) / skill (`SKILL.md` + `README.md`) / NPI_Brief 템플릿 / B-002 산출물 / Naming Map / Document Terminology Map / Phase + WP-NNN naming — 모두 손대지 않음 (정책 변경 0).
+- L1 / L2 / L4 의 기존 v0.2.1 frozen 정책 문서 — 본문 변경 0 (`Non_Blocking_Execution_정책.md` 만 §8 amendment append).
+- source project (`12.subscription-payment-saas-platform`) — 어떤 파일도 수정 0.
+
+### Verification (Director Acceptance 직전 수행)
+
+- **B-002 self-test (회귀 보호)**: `python run.py --brief 3_Domain_Project_Playbooks/ai-npi-platform/B-002_NPI_Brief.md` — expected `total=6 pass=6 fail=0 exit=0`. 코드 변경 0 이므로 PASS 자연 결과.
+- **B-003 self-test (회귀 보호)**: 동일 — expected `total=9 pass=9 fail=0 exit=0`.
+- B-004 신설 여부 = Director 결정 (본 v0.3.0 candidate AC 박제 시점에 검토). 본 draft = B-004 미생성.
+
+### 다음 단계 (Foundry 측)
+
+- Director Acceptance (1-line "진행" 또는 carded review).
+- Acceptance 시 frozen 격상: `factory.yaml.factory.version` `0.2.1` → `0.3.0` + `status: frozen` + `frozen_on` 박제 + B-002/B-003 revalidation.
+- 격상 commit 후 Foundry repo tag `v0.3.0`.
+
+### Source Project Changes Required (격상 이후, 별도 cycle)
+
+- source project `meta/decisions.md` 에 D-024 + D-025 정식 박제 (현재 본 v0.3.0 candidate 의 source).
+- source project `meta/foundry-improvement-log.md` 에 FIL-014 (`.env.local` worktree) 정식 추가.
+- source project `meta/foundry-backport-candidates.md` 의 *승인* 섹션에 FIL-008 / FIL-014 / FIL-WP005-pattern 박제 (현재 *보류* / 신설).
+- 위 변경은 *Foundry frozen 격상 이후 별도 cycle*. 본 작업 범위 = Foundry draft only.
+
+---
+
 ## [v0.2.1] — Frozen 2026-05-12 (elevated from candidate)
 
 > **운영정책 update — Frame/runner/hook/skill 코드 변경 0, 정책/문서 add only.**
