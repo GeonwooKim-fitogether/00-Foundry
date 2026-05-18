@@ -1,18 +1,24 @@
 factory:
   name: ai-npi-factory
-  version: 0.2.1
+  version: 0.3.0
   status: frozen
-  frozen_on: 2026-05-12
-  previous_version: 0.2.0
+  frozen_on: 2026-05-18
+  previous_version: 0.2.1
   elevation_evidence:
     field_validation_project: 12.subscription-payment-saas-platform
     phase_1_closure_sha: 3b8bc60
     phase_2_closure_sha: 9b2967a
-    operating_model_data: D-001..D-014 + FIL-001..FIL-008
+    phase_3_closure_sha: 413848d
+    phase_4_closure_sha: babf02f
+    phase_5_closure_decision: D-024 (2026-05-18)
+    operating_model_data: D-001..D-025 + FIL-001..FIL-015 (3 adopted in v0.3.0)
     revalidation:
-      b002_self_test: PASS (6/6, exit 0, 2026-05-12)
-      b003_self_test: PASS (9/9, exit 0, 2026-05-12)
+      b002_self_test: PASS (6/6, exit 0, 2026-05-18)
+      b003_self_test: PASS (9/9, exit 0, 2026-05-18)
+      v030_self_check: PASS (12/12, file_exists + version_match)
     project_repo_pr_d014: https://github.com/GeonwooKim-fitogether/12.subscription-payment-saas-platform/pull/13
+    foundry_pr_v030_candidate: https://github.com/GeonwooKim-fitogether/00-Foundry/pull/3
+    director_acceptance: "Foundry v0.3.0 PASS" (Director 김건우, 2026-05-18)
 
 layers:
   - id: L1
